@@ -41,59 +41,16 @@
  ;; If there is more than one, they won't work right.
  )
 
-
-;; 80 chars
-(require 'whitespace)
-(setq whitespace-line-column 80)
-(setq whitespace-style '(face lines-tail))
-(add-hook 'prog-mode-hook 'whitespace-mode)
-
-;; python
-(require 'python-mode)
-(require 'python-pep8)
-(require 'python-pylint)
-(require 'flymake-cursor)
-(require 'company)
-(require 'pyenv-mode)
-(eval-after-load "company"
-  '(progn
-     (add-to-list 'company-backends 'company-anaconda)))
-(add-to-list 'auto-mode-alist '("\.py\'" . python-mode))
-(add-hook 'python-mode-hook 'global-company-mode)
-(add-hook 'python-mode-hook 'anaconda-mode)
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-(add-hook 'find-file-hook 'flymake-find-file-hook)
-(when (load "flymake" t)
-  (defun flymake-pyflakes-init ()
-    (let* ((temp-file (flymake-init-create-temp-buffer-copy
-		       'flymake-create-temp-inplace))
-	   (local-file (file-relative-name
-			temp-file
-			(file-name-directory buffer-file-name))))
-      (list "pycheckers"  (list local-file))))
-  (add-to-list 'flymake-allowed-file-name-masks
-	       '("\\.py\\'" flymake-pyflakes-init)))
-(load-library "flymake-cursor")
-
-;; web
-(require 'web-mode)
-(require 'emmet-mode)
-(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tmpl\\'" . web-mode))
-(add-hook 'web-mode-hook 'emmet-mode)
-
 ;; snippets
 (require 'yasnippet)
 (yas-global-mode 1)
 
-;; TODO
-(require 'org)
-(setq org-log-done t)
-(setq org-agenda-files (list "~/.emacs.d/org/TODO.org"))
-
-;; keyboard shortcuts
+;; global keyboard shortcuts
 (global-set-key (kbd "<f2>") 'goto-line)
-(global-set-key (kbd "M-p") 'flymake-goto-prev-error)
-(global-set-key (kbd "M-n") 'flymake-goto-next-error)
+
+;; my configs
+(add-to-list 'load-path "~/.emacs.d/config/")
+(require 'python-config)
+(require 'web-config)
+(require 'org-config)
+(require 'mail-config)
