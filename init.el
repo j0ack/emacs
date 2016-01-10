@@ -35,6 +35,9 @@
 (setq ido-case-fold t)
 (setq ido-separator "\n")
 
+;; git
+(require 'magit)
+
 ;; global keyboard shortcuts
 (global-set-key (kbd "<f2>") 'goto-line)
 
