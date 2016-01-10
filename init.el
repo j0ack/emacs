@@ -22,28 +22,18 @@
 (require 'package)
 (package-initialize)
 
-
-
 ;; themes
 (load-theme 'zenburn t)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("a444b2e10bedc64e4c7f312a737271f9a2f2542c67caa13b04d525196562bf38" default))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 
 ;; snippets
 (require 'yasnippet)
 (yas-global-mode 1)
+
+;; ido
+(ido-mode)
+(ido-everywhere 1)
+(setq ido-case-fold t)
+(setq ido-separator "\n")
 
 ;; global keyboard shortcuts
 (global-set-key (kbd "<f2>") 'goto-line)
